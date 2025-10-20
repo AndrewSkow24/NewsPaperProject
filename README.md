@@ -1,0 +1,2 @@
+# NewsPaperProject
+Новостная платформа 

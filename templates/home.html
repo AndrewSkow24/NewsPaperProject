@@ -3,17 +3,6 @@
 {% block title %} Домашняя страница {% endblock title %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<p>Привет, {{ user.username }} !</p>
-<p>Тебе {{ user.age }} лет .</p>
-<form action="{% url 'logout' %}" method="post">
-    {% csrf_token %}
-    <button type="submit">Выйти</button>
-</form>
-{% else %}
-<p>Вы не вошли на сайт</p>
-<a href="{% url 'login' %}">Войти</a>
-<a href="{% url 'signup' %}">Регистрация</a>
-{% endif %}
+
 
 {% endblock content %}

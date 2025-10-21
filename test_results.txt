@@ -1,0 +1,10 @@
+(.venv) andrejskovorodnikov@MacBook-Air-Andrej NewsPaperProject % python3 manage.py test
+Found 7 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 1.112s
+
+OK
+Destroying test database for alias 'default'...

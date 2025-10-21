@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход на сайт{% endblock title %}
+
+{% block content %}
+<h2>Вход на сайт</h2>
+<form method="post">
+    {% csrf_token  %}
+    {{ form }}
+    <button type="submit">Войти</button>
+</form>
+{% endblock content %}

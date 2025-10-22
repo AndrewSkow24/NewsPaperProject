@@ -10,10 +10,11 @@ load_dotenv(BASE_DIR / ".env")
 SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-fallback-key-for-dev")
 DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 
-ALLOWED_HOSTS = []
-if not DEBUG:
-    ALLOWED_HOSTS = [".railway.app", "localhost", "127.0.0.1"]
-
+ALLOWED_HOSTS = [
+    "anjeie24.pythonanywhere.com",
+    "localhost",
+    "127.0.0.1",
+]
 # АВТОМАТИЧЕСКАЯ БАЗА ДАННЫХ
 DATABASES = {
     "default": dj_database_url.config(

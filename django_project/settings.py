@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # приложения проекта
     "accounts.apps.AccountsConfig",
     "pages",
+    "articles",
     # сторонние приложения
     "crispy_forms",
     "crispy_bootstrap5",

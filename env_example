@@ -1,0 +1,8 @@
+# Email-настройки
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+DEFAULT_FROM_EMAIL=
+
+# Безопасность Django
+SECRET_KEY=
+DEBUG=True

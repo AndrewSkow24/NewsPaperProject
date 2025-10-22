@@ -8,14 +8,19 @@
         <p>{{object.body }}</p>
     </div>
 
-    <div>
-        <p>
-            <a href="{% url 'article_edit' article.pk %}">Редактировать</a>
-            <a href="{% url 'article_delete' article.pk %}">Удалить</a>
-        </p>
-        <p>Назад ко
-            <a href="{% url 'article_list' %}">всем статьям</a>
-        </p>
-    </div>
+    {% if article.author.pk == request.user.pk %}
+
+
+        <div>
+            <p>
+                <a href="{% url 'article_edit' article.pk %}">Редактировать</a>
+                <a href="{% url 'article_delete' article.pk %}">Удалить</a>
+            </p>
+            <p>Назад ко
+                <a href="{% url 'article_list' %}">всем статьям</a>
+            </p>
+        </div>
+
+    {% endif %}
 
 {% endblock %}

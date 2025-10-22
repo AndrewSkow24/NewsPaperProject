@@ -8,15 +8,20 @@ os.environ["SSL_CERT_FILE"] = certifi.where()
 ssl._create_default_https_context = ssl._create_unverified_context
 
 from dotenv import load_dotenv
+from pathlib import Path
+from environs import Env
+
+env = Env()
+env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = bool(os.getenv("DEBUG"))
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 
 INSTALLED_APPS = [
@@ -33,17 +38,29 @@ INSTALLED_APPS = [
     # сторонние приложения
     "crispy_forms",
     "crispy_bootstrap5",
+    "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",  # new
+    },
+}
+
 
 ROOT_URLCONF = "django_project.urls"
 
@@ -68,14 +85,14 @@ WSGI_APPLICATION = "django_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
+#     }
+# }
 
-
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
@@ -141,3 +158,5 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
+
+CSRF_TRUSTED_ORIGINS = ["https://*.herokuapp.com"]  # new»
